@@ -56,8 +56,7 @@ class Losowanie{
 			} else if (select != 'T' && select != 't') {
 				System.out.println("Podaj poprawn¹ wartoœæ.");
 				continue;
-			}
-			else {
+			} else {
 				return true;
 			}
 		}
