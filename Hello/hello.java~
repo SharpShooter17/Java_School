@@ -1,0 +1,16 @@
+
+
+class Hello
+{
+  public static void main(String args[])
+  {
+    System.out.println("Hello, World");
+    
+    for (String elem : args)
+    {
+      System.out.println(elem);
+    }
+    
+    return;
+  }
+};
