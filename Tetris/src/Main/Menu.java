@@ -17,7 +17,7 @@ public class Menu extends JFrame {
 		
 		setLayout(new GridLayout(5, 1));	
 		
-		JPanel backgroundImage = new Image("./images/background.jpg");
+		JPanel backgroundImage = Model.getImage(IMAGES.BACKGROUND);
 		
 		add(backgroundImage);
 		add(new JButton("Play"));
