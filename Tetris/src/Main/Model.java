@@ -1,5 +1,7 @@
 package Main;
 
+import javax.swing.JPanel;
+
 public class Model {
 	
 	static private Image [] Images;
@@ -24,6 +26,5 @@ public class Model {
 	static public Image getImage(IMAGES image) {
 		return Images[image.denomValue()];
 	}
-	
 }
 

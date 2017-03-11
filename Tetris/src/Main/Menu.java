@@ -1,31 +1,38 @@
 package Main;
 
-import java.awt.GridLayout;
-import javax.swing.JButton;
+import java.awt.BorderLayout;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-
-
 public class Menu extends JFrame {
+	JFrame Window;
+	MainMenu mainMenu;
+	Settings settingsMenu;
+	private JPanel backgroundImage;
+	
 	Menu(){
-		super("Tetris game");
-		
+		new JFrame("Tetris game");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(512, 1024);
 		setLocation(0, 0);
 		
-		setLayout(new GridLayout(5, 1));	
+		backgroundImage = Model.getImage(IMAGES.BACKGROUND);		
+		backgroundImage.setSize(512, 256);
 		
-		JPanel backgroundImage = Model.getImage(IMAGES.BACKGROUND);
+		settingsMenu = new Settings();
+		mainMenu = new MainMenu();
+
+		BorderLayout layout = new BorderLayout(3,1);
+		setLayout(layout);	
 		
 		add(backgroundImage);
-		add(new JButton("Play"));
-		add(new JButton("Settings"));
-		add(new JButton("Top 10"));
-		add(new JButton("Exit"));
+		add(mainMenu);
 		
-		pack();
+		layout.addLayoutComponent(backgroundImage, BorderLayout.NORTH);
+		layout.addLayoutComponent(mainMenu, BorderLayout.CENTER);
+		
+		
 		
 		setVisible(true);
 	}
