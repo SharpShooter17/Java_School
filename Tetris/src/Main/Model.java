@@ -1,7 +1,5 @@
 package Main;
 
-import javax.swing.JPanel;
-
 public class Model {
 	
 	static private Image [] Images;

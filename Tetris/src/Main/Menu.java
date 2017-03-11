@@ -1,6 +1,7 @@
 package Main;
 
 import java.awt.BorderLayout;
+import java.awt.Container;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -9,7 +10,10 @@ public class Menu extends JFrame {
 	JFrame Window;
 	MainMenu mainMenu;
 	Settings settingsMenu;
+	GameWindow gameWindow;
+	
 	private JPanel backgroundImage;
+	private BorderLayout layout; 
 	
 	Menu(){
 		new JFrame("Tetris game");
@@ -20,10 +24,11 @@ public class Menu extends JFrame {
 		backgroundImage = Model.getImage(IMAGES.BACKGROUND);		
 		backgroundImage.setSize(512, 256);
 		
-		settingsMenu = new Settings();
-		mainMenu = new MainMenu();
+		settingsMenu = new Settings(this);
+		mainMenu = new MainMenu(this);
+		gameWindow = new GameWindow(this);
 
-		BorderLayout layout = new BorderLayout(3,1);
+		layout = new BorderLayout(3,1);
 		setLayout(layout);	
 		
 		add(backgroundImage);
@@ -32,8 +37,37 @@ public class Menu extends JFrame {
 		layout.addLayoutComponent(backgroundImage, BorderLayout.NORTH);
 		layout.addLayoutComponent(mainMenu, BorderLayout.CENTER);
 		
-		
-		
 		setVisible(true);
 	}
+	
+	void setSettings(Container container){
+		remove(container);
+		layout.removeLayoutComponent(container);
+		add(settingsMenu);
+		layout.addLayoutComponent(settingsMenu, BorderLayout.CENTER);
+		setVisible(true);
+		repaint();
+	}
+	
+	void setMainMenu(Container container){
+		remove(container);
+		layout.removeLayoutComponent(container);
+		add(mainMenu);
+		layout.addLayoutComponent(mainMenu, BorderLayout.CENTER);
+		setVisible(true);
+		repaint();
+	}
+	
+	void runGame(){
+		remove(mainMenu);
+		remove(backgroundImage);
+		layout.removeLayoutComponent(mainMenu);
+		layout.removeLayoutComponent(backgroundImage);
+		add(gameWindow);
+		layout.addLayoutComponent(gameWindow, BorderLayout.CENTER);
+		gameWindow.startGame();
+		setVisible(true);
+		repaint();
+	}
+	
 }
