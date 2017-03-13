@@ -10,23 +10,22 @@ public class Menu extends JFrame {
 	JFrame Window;
 	MainMenu mainMenu;
 	Settings settingsMenu;
-	GameWindow gameWindow;
 	
 	private JPanel backgroundImage;
 	private BorderLayout layout; 
 	
 	Menu(){
+		new Model();
 		new JFrame("Tetris game");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(512, 1024);
+		setSize(512, 960);
 		setLocation(0, 0);
 		
-		backgroundImage = Model.getImage(IMAGES.BACKGROUND);		
+		backgroundImage = Model.getImage(IMAGES.BACKGROUND);	
 		backgroundImage.setSize(512, 256);
 		
 		settingsMenu = new Settings(this);
 		mainMenu = new MainMenu(this);
-		gameWindow = new GameWindow(this);
 
 		layout = new BorderLayout(3,1);
 		setLayout(layout);	
@@ -63,9 +62,9 @@ public class Menu extends JFrame {
 		remove(backgroundImage);
 		layout.removeLayoutComponent(mainMenu);
 		layout.removeLayoutComponent(backgroundImage);
-		add(gameWindow);
-		layout.addLayoutComponent(gameWindow, BorderLayout.CENTER);
-		gameWindow.startGame();
+		//add(gameWindow);
+		//layout.addLayoutComponent(gameWindow, BorderLayout.CENTER);
+		//gameWindow.startGame();
 		setVisible(true);
 		repaint();
 	}

@@ -4,7 +4,9 @@ public class Model {
 	
 	static private Image [] Images;
 	
-	Model(){
+	{
+		System.out.println("Images Loading...");
+		
 		String [] pathImage = { "./images/background.jpg",
 								"./images/blue.png",
 								"./images/brown.png",

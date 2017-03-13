@@ -18,6 +18,7 @@ public enum IMAGES {
 	 IMAGES(int denomValue){ 
 		 this.denomValue = denomValue;  
 	 }  
+	 	 
 	 public int denomValue() {  
 		 return denomValue;  
 	 }  
