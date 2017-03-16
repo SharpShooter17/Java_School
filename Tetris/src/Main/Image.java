@@ -18,7 +18,7 @@ public class Image extends JPanel {
 
 		File imageFile = new File(file);
 		try {
-			image = ImageIO.read(imageFile);
+			setImage(ImageIO.read(imageFile));
 		} catch (IOException e) {
 			System.err.println("Blad odczytu obrazka: " + file);
 			e.printStackTrace();
@@ -26,6 +26,14 @@ public class Image extends JPanel {
 
 		Dimension dimension = new Dimension(image.getWidth(), image.getHeight());
 		setPreferredSize(dimension);
+	}
+
+	public BufferedImage getImage() {
+		return image;
+	}
+
+	public void setImage(BufferedImage image) {
+		this.image = image;
 	}
 
 	@Override

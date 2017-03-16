@@ -1,22 +1,24 @@
 package Main;
 
 public enum TILE {
-	RED(0),
-	GREEN(1), 
-	BLUE(2), 
-	YELLOW(3), 
-	BROWN(4),
-	ORANGE(5),
-	PURPLE(6),
-	TORQUISE(7),
-	EMPTY(8);
-	
-	private final int denomValue;
+	RED(IMAGES.RED),
+	GREEN(IMAGES.GREEN), 
+	BLUE(IMAGES.BLUE), 
+	YELLOW(IMAGES.YELLOW), 
+	BROWN(IMAGES.BROWN),
+	ORANGE(IMAGES.ORANGE),
+	PURPLE(IMAGES.PURPLE),
+	TORQUISE(IMAGES.TORQUISE),
+	EMPTY(IMAGES.PAUSE);
+		 
+	private final IMAGES image;
+
+    private TILE(IMAGES image) {
+        this.image = image;
+    }
+
+    public IMAGES toImage() {
+        return image;
+    }
 	 
-	TILE(int denomValue){ 
-		 this.denomValue = denomValue;  
-	 }  
-	 public int denomValue() {  
-		 return denomValue;  
-	 } 
 }

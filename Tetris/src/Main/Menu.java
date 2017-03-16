@@ -1,6 +1,7 @@
 package Main;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 
 import javax.swing.JFrame;
@@ -15,13 +16,12 @@ public class Menu extends JFrame {
 	private BorderLayout layout; 
 	
 	Menu(){
-		new Model();
 		new JFrame("Tetris game");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(512, 960);
 		setLocation(0, 0);
 		
-		backgroundImage = Model.getImage(IMAGES.BACKGROUND);	
+		backgroundImage = Model.getModel().getImage(IMAGES.BACKGROUND);	
 		backgroundImage.setSize(512, 256);
 		
 		settingsMenu = new Settings(this);
@@ -35,6 +35,8 @@ public class Menu extends JFrame {
 		
 		layout.addLayoutComponent(backgroundImage, BorderLayout.NORTH);
 		layout.addLayoutComponent(mainMenu, BorderLayout.CENTER);
+		
+		setBackground(Color.BLACK);
 		
 		setVisible(true);
 	}
@@ -62,11 +64,14 @@ public class Menu extends JFrame {
 		remove(backgroundImage);
 		layout.removeLayoutComponent(mainMenu);
 		layout.removeLayoutComponent(backgroundImage);
-		//add(gameWindow);
-		//layout.addLayoutComponent(gameWindow, BorderLayout.CENTER);
-		//gameWindow.startGame();
+						
+		Game game = new Game();
+		add(game.getBoard());
+		layout.addLayoutComponent(game.getBoard(), BorderLayout.CENTER);
+		
+		setSize(1024, 960);
+		
 		setVisible(true);
 		repaint();
 	}
-	
 }

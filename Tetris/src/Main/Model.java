@@ -2,9 +2,10 @@ package Main;
 
 public class Model {
 	
-	static private Image [] Images;
+	private Image [] Images;
+	private static Model model;
 	
-	{
+	private Model(){
 		System.out.println("Images Loading...");
 		
 		String [] pathImage = { "./images/background.jpg",
@@ -23,7 +24,14 @@ public class Model {
 			Images[i] = new Image(pathImage[i]);		
 	}
 	
-	static public Image getImage(IMAGES image) {
+	static Model getModel(){
+		if (!(model instanceof Model)){
+			model = new Model();
+		}
+		return model;
+	}
+	
+	public Image getImage(IMAGES image) {
 		return Images[image.denomValue()];
 	}
 }
