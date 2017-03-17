@@ -28,18 +28,18 @@ public class Game implements ActionListener, KeyListener {
 	private void loop(){
 		if (state == STATE.GAME_OVER){
 			return;
-		}
-		
-		if (state == STATE.PAUSE){
+		} else if (state == STATE.PAUSE){
 			timer.stop();
-		}
-		
-		if (isBlock == false){
+			
+		}else if (isBlock == false){
 			board.setCurentShape(Shape.getShape(Shape.randomShape()));
 			isBlock = true;
-
 		} else if (state == STATE.IN_GAME) {
 			board.downCurrentBlock();
+			isBlock = !board.isColision();
+			if (!isBlock){
+				board.writeCurrentShapeToBoard();
+			}
 		}
 		
 		board.repaint();		
@@ -59,21 +59,23 @@ public class Game implements ActionListener, KeyListener {
 		switch (e.getKeyCode()) {
 		case 'A':
 		case 'a': board.leftCurrentBlock();	
-			System.out.println("left");
 			break;
-
+		case 'D':
+		case 'd': board.rightCurrentBlock();
+			break;
+		case 'S':
+		case 's': board.downCurrentBlock();
+			break;
 		default:
 			break;
-		}		
+		}	
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		
 	}
 
 	@Override
-	public void keyTyped(KeyEvent arg0) {
-		
+	public void keyTyped(KeyEvent e) {
 	}
 }

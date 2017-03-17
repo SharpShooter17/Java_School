@@ -66,6 +66,9 @@ public class Board extends JPanel {
 	}
 	
 	public void downCurrentBlock(){
+		if ( yCur + 1 >= Height ){
+			return;
+		}
 		this.yCur++;
 	}
 	
@@ -86,5 +89,44 @@ public class Board extends JPanel {
 		this.xCur = Width/2;
 		this.yCur = 0;
 	}
-
+	
+	private int getHeightCurBlock(){
+		if (curentShape instanceof TILE[][] ){
+			return curentShape.length;
+		}
+		return 0;
+	}
+	
+	public boolean isColision(){
+		if ((yCur + 1 + getHeightCurBlock()) >= Height){
+			return true;
+		}
+		for (int i = 0; i < curentShape.length; i++){
+			for (int j = 0; j < curentShape[i].length; j++){
+				if ( curentShape[i][j] == TILE.EMPTY ){
+					continue;
+				}
+				
+				if ((yCur + i + 1) >= Height){
+					return true;
+				}
+				
+				if ( board[yCur + i + 1][xCur + j] != TILE.EMPTY ){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public void writeCurrentShapeToBoard(){
+		for (int i = 0; i < curentShape.length; i++){
+			for (int j = 0; j < curentShape[i].length; j++){
+				if ( curentShape[i][j] == TILE.EMPTY ){
+					continue;
+				}
+				board[i + yCur][j+xCur] = curentShape[i][j];
+			}
+		}
+	}
 }
