@@ -15,9 +15,11 @@ public class Board extends JPanel {
 	private TILE [][] board;
 	private TILE [][] curentShape;
 	
+	private int xCur, yCur;
+	
 	Board(int w, int h){
 		
-		//Model.getModel().getImage(IMAGES.TLO_INKSCAPE).paintComponent(getGraphics());
+//		Model.getModel().getImage(IMAGES.TLO_INKSCAPE).paintComponent(getGraphics());
 		this.Width = w;
 		this.Height = h;
 		this.tileSize = 512/w;
@@ -33,8 +35,9 @@ public class Board extends JPanel {
 	public void paintComponent(Graphics g){
 		Graphics2D g2d=(Graphics2D)g; 
 		for (int i = 0; i < board.length; ++i) {
-            for (int j = 0; j < board[j].length; ++j) {
+            for (int j = 0; j < board[i].length; ++j) {
             	if (board[i][j] == TILE.EMPTY){
+            		g2d.clearRect(j*tileSize, i*tileSize, tileSize, tileSize);
             		continue;
             	}
             	
@@ -44,26 +47,44 @@ public class Board extends JPanel {
             }
         }	
 		
-		for (int i = 0; i < curentShape.length; ++i) {
-            for (int j = 0; j < curentShape[j].length; ++j) {
+		if (!(curentShape instanceof TILE [][])){
+			System.out.println("NULL");
+			return;
+		}
+		
+		for (int i = 0; i < curentShape.length; i++) {
+            for (int j = 0; j < curentShape[i].length; j++) {
             	if (curentShape[i][j] == TILE.EMPTY){
             		continue;
             	}
             	
             	Image img = Model.getModel().getImage(curentShape[i][j].toImage());
             	g2d.drawImage(	img.getImage().getScaledInstance(tileSize, tileSize, BufferedImage.TYPE_INT_ARGB), 
-            					j*tileSize, i*tileSize, this); 
+            					(j + xCur)*tileSize, (i + yCur)*tileSize, this); 
             }
-        }	
-		
+        }
+	}
+	
+	public void downCurrentBlock(){
+		this.yCur++;
+	}
+	
+	public void leftCurrentBlock(){
+		this.xCur--;
+	}
+	
+	public void rightCurrentBlock(){
+		this.xCur++;		
 	}
 
 	public TILE [][] getCurentShape() {
 		return curentShape;
 	}
 
-	public void setCurentShape(TILE [][] curentShape) {
+	public void setCurentShape(final TILE [][] curentShape) {
 		this.curentShape = curentShape;
+		this.xCur = Width/2;
+		this.yCur = 0;
 	}
 
 }

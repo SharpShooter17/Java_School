@@ -2,10 +2,12 @@ package Main;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.Timer;
 
-public class Game implements ActionListener {
+public class Game implements ActionListener, KeyListener {
 	
 	enum STATE {IN_GAME, PAUSE, GAME_OVER };
 	STATE state;
@@ -35,9 +37,9 @@ public class Game implements ActionListener {
 		if (isBlock == false){
 			board.setCurentShape(Shape.getShape(Shape.randomShape()));
 			isBlock = true;
-			return;
-		} else {
-			//przesun w dó³
+
+		} else if (state == STATE.IN_GAME) {
+			board.downCurrentBlock();
 		}
 		
 		board.repaint();		
@@ -50,5 +52,28 @@ public class Game implements ActionListener {
 	
 	Board getBoard(){
 		return board;
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		switch (e.getKeyCode()) {
+		case 'A':
+		case 'a': board.leftCurrentBlock();	
+			System.out.println("left");
+			break;
+
+		default:
+			break;
+		}		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		
 	}
 }
