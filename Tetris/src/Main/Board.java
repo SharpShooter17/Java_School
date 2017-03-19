@@ -66,20 +66,37 @@ public class Board extends JPanel {
 	}
 	
 	public void downCurrentBlock(){
-		if ( yCur + 1 >= Height ){
+		if ( ((yCur + 1 + Shape.getHeightCurBlock(curentShape)) >= Height) || isColision() ){
 			return;
 		}
 		this.yCur++;
 	}
 	
 	public void leftCurrentBlock(){
+		if (this.xCur == 0){
+			return;
+		}
 		this.xCur--;
+		if (isColisionAfterTranslation()){
+			this.xCur++;
+		}
 	}
 	
 	public void rightCurrentBlock(){
-		this.xCur++;		
-	}
+		if ((this.xCur + Shape.getWidthCurBlock(curentShape)) == Width){
+			return;
+		}
+		this.xCur++;
+		
+		if (isColisionAfterTranslation()){
+			this.xCur--;
+		}
+	}	
 
+	public void rotateCurrentShape(){
+		curentShape = Shape.rotate(curentShape);
+	}
+	
 	public TILE [][] getCurentShape() {
 		return curentShape;
 	}
@@ -90,15 +107,8 @@ public class Board extends JPanel {
 		this.yCur = 0;
 	}
 	
-	private int getHeightCurBlock(){
-		if (curentShape instanceof TILE[][] ){
-			return curentShape.length;
-		}
-		return 0;
-	}
-	
 	public boolean isColision(){
-		if ((yCur + 1 + getHeightCurBlock()) >= Height){
+		if ((yCur + 1 + Shape.getHeightCurBlock(curentShape)) >= Height){
 			return true;
 		}
 		for (int i = 0; i < curentShape.length; i++){
@@ -116,6 +126,22 @@ public class Board extends JPanel {
 				}
 			}
 		}
+		return false;
+	}
+	
+	private boolean isColisionAfterTranslation(){
+		for (int i = 0; i < curentShape.length; i++){
+			for (int j = 0; j < curentShape[i].length; j++){
+				if ( curentShape[i][j] == TILE.EMPTY ){
+					continue;
+				}
+				if ( board[yCur + i][xCur + j] != TILE.EMPTY ){
+					return true;
+				}
+			}
+		}
+		
+		
 		return false;
 	}
 	

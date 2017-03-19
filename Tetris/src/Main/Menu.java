@@ -65,12 +65,11 @@ public class Menu extends JFrame {
 		layout.removeLayoutComponent(mainMenu);
 		layout.removeLayoutComponent(backgroundImage);
 						
-		Game game;
-		addKeyListener( game = new Game() );
+		Game game = new Game();
+		addKeyListener( game );
 
 		add(game.getBoard());
 		layout.addLayoutComponent(game.getBoard(), BorderLayout.CENTER);
-		addKeyListener(game);
 		setSize(1024, 960);
 		
 		setVisible(true);

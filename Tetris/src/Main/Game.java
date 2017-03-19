@@ -29,8 +29,7 @@ public class Game implements ActionListener, KeyListener {
 		if (state == STATE.GAME_OVER){
 			return;
 		} else if (state == STATE.PAUSE){
-			timer.stop();
-			
+			//Do nothefing			
 		}else if (isBlock == false){
 			board.setCurentShape(Shape.getShape(Shape.randomShape()));
 			isBlock = true;
@@ -58,13 +57,20 @@ public class Game implements ActionListener, KeyListener {
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {
 		case 'A':
-		case 'a': board.leftCurrentBlock();	
+		case 'a': 
+			board.leftCurrentBlock();	
 			break;
 		case 'D':
-		case 'd': board.rightCurrentBlock();
+		case 'd': 
+			board.rightCurrentBlock();
 			break;
 		case 'S':
-		case 's': board.downCurrentBlock();
+		case 's':
+			board.downCurrentBlock();
+			break;
+		case 'w':
+		case 'W':
+			board.rotateCurrentShape();
 			break;
 		default:
 			break;
@@ -77,5 +83,21 @@ public class Game implements ActionListener, KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
+		switch (e.getKeyChar()) {
+		case 'P':
+		case 'p':
+			if (state == STATE.IN_GAME){
+				state = STATE.PAUSE;
+				timer.stop();
+			} else if (state == STATE.PAUSE){
+				state = STATE.IN_GAME;
+				timer.start();
+			}
+			
+			break;
+
+		default:
+			break;
+		}
 	}
 }
