@@ -3,11 +3,11 @@ import java.util.Scanner;
 import java.util.NoSuchElementException;	
 import java.util.InputMismatchException;
 
-class Losowanie{
+class Play{
 	int up, down;
 	Scanner input;
 	
-	Losowanie(int down, int up){
+	Play(int down, int up){
 		super();
 		
 		if (up < down) {
@@ -33,7 +33,7 @@ class Losowanie{
 		while (!done){
 			int user_type = userType();
 			if (user_type == magic){
-				System.out.println("Brawo! To ta liczba. Iloœæ prób to: " + attempt);
+				System.out.println("Brawo! To ta liczba. Ilosc prob to: " + attempt);
 				done = !onceMore();
 				
 				if (!done) {
@@ -49,12 +49,12 @@ class Losowanie{
 	
 	private boolean onceMore() {		
 		while (true){
-			System.out.print("Czy chcesz spróbowaæ jeszcze raz? [T/N] : ");
+			System.out.print("Czy chcesz sprobowac jeszcze raz? [T/N] : ");
 			char select = input.next().charAt(0);
 			if ( select == 'N' || select == 'n' ){
 				return false;
 			} else if (select != 'T' && select != 't') {
-				System.out.println("Podaj poprawn¹ wartoœæ.");
+				System.out.println("Podaj poprawna wartosc.");
 				continue;
 			} else {
 				return true;
@@ -66,12 +66,12 @@ class Losowanie{
 		int result = 1;
 		boolean done = false;
 		while (!done) {
-			System.out.print("Podaj liczbê: ");
+			System.out.print("Podaj liczbe: ");
 			try {
 				result = input.nextInt();
 				done = true;
 			} catch (InputMismatchException e) {
-				System.out.print("B³êdny format. ");
+				System.out.print("Bledny format. ");
 				input.nextLine();
 				done = false;
 			}
@@ -83,11 +83,9 @@ class Losowanie{
 		if ( (user_type > up) || user_type < down ){
 			System.out.println("Podana liczba jest spoza zakresu!");
 		} else if (user_type < magic){
-			System.out.println("Celuj wy¿ej");
+			System.out.println("Celuj wyzej");
 		} else if (user_type > magic){
-			System.out.println("Celuj ni¿ej");
-		} else{
-			System.out.println("Ten kod nigdy nie powinien siê wykonaæ. Losowanie.java : run()");
+			System.out.println("Celuj nizej");
 		}
 	}
 	
