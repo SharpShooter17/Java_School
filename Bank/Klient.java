@@ -5,21 +5,23 @@ public class Klient{
   private String nazwisko;
   private Address adres;
   private double stanKonta;
-  private String pesel;
+  private long pesel;
+  private Long numerKonta;
   
-  Klient(String imie, String nazwisko, String pesel, Address adres, double stanKonta){
+  Klient(String imie, String nazwisko, long pesel, Address adres, double stanKonta, long numerKonta){
 	this.setImie(imie);
 	this.setNazwisko(nazwisko);
 	this.setPesel(pesel);
 	this.setAdres(adres);
 	this.setStanKonta(stanKonta);
+	this.setNumerKonta(numerKonta);
   }
 
-	public String getPesel() {
+	public long getPesel() {
 		return pesel;
 	}
 	
-	public void setPesel(String pesel) {
+	public void setPesel(long pesel) {
 		this.pesel = pesel;
 	}
 	
@@ -57,8 +59,18 @@ public class Klient{
 	public void wyswietlDane(){
 		System.out.print( "Imie: " + imie + 
 							"\nNazwisko: " + nazwisko + 
+							"\nPESEL" + pesel +
 							"\nStan konta: " + stanKonta + 
 							"\nAdres: ");
 		adres.showAddress();
+		System.out.println("Numer konta: " + numerKonta);
+	}
+
+	public Long getNumerKonta() {
+		return numerKonta;
+	}
+
+	private void setNumerKonta(Long numerKonta) {
+		this.numerKonta = numerKonta;
 	}
 }

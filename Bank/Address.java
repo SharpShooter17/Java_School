@@ -30,4 +30,23 @@ public class Address{
   public void showAddress(){
 	System.out.println( city + ", " + postalCode + ", " + street + " " + houseNumber );
   }
+  
+  public boolean equals(Object obj){
+	  if (this == obj){
+		  return true;
+	  }
+	  
+	  if ( !(obj instanceof Address)){
+		  return false;
+	  }
+	  
+	  Address tmp = (Address)obj;
+	  
+	  if (street == tmp.street && city == tmp.city & postalCode == tmp.postalCode && houseNumber == tmp.houseNumber){
+		  return true;
+	  } else {
+		  return false;
+	  }
+  }
+  
 }

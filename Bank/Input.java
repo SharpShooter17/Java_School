@@ -1,33 +1,30 @@
 import java.util.Scanner;
 
 public class Input {
-	enum VAR { INT(0), DOUBLE(1), STRING(2); 
-		int enumValue; 
-		VAR(int val){ 
-			enumValue = val;
-		} 
-		int getDenom(){
-			return enumValue;
-		}
-		};
 	
-	static private Scanner sc = new Scanner(System.in);
+	static private Scanner sc;
+	static private Input in;
+	
+    private	Input(){
+ 		sc = new Scanner(System.in);
+	}
+	
+    public static Input instance(){
+    	if (!(in instanceof Input)){
+    		in = new Input();
+    	}
+    	
+    	return in;
+    }
 		
-	static public Object get(VAR var, String information){
-		
+	public int Int(String information){
 		boolean done = true;
-		Object result = null;
+		int result = 0;
 		do {
 			done = true;
 			System.out.println(information);
 			try {
-				if (var == VAR.INT){
-					result = sc.nextInt();
-				} else if (var == VAR.DOUBLE){
-					result = sc.nextDouble();
-				} else if (var == VAR.STRING) {
-					result = sc.nextLine();
-				}
+				result = sc.nextInt();
 			} catch(Exception e){
 				done = false;
 				sc.nextLine();
@@ -37,4 +34,57 @@ public class Input {
 		
 		return result;	
 	}
+	
+	public long Long(String information){
+		boolean done = true;
+		long result = 0;
+		do {
+			done = true;
+			System.out.println(information);
+			try {
+				result = sc.nextLong();
+			} catch(Exception e){
+				done = false;
+				sc.nextLine();
+			}
+		
+		} while (!done);
+		
+		return result;	
+	}
+	
+	public double Double(String information){
+		boolean done = true;
+		double result = 0.0;
+		do {
+			done = true;
+			System.out.println(information);
+			try {
+				result = sc.nextDouble();
+			} catch(Exception e){
+				done = false;
+				sc.nextLine();
+			}
+		} while (!done);
+		
+		return result;	
+	}
+	
+	public String Str(String information){
+		boolean done = true;
+		String result = null;
+		do {
+			done = true;
+			System.out.println(information);
+			try {
+				while((result = sc.nextLine()).isEmpty());
+			} catch(Exception e){
+				done = false;
+				sc.nextLine();
+			}
+		} while (!done);
+		
+		return result;	
+	}
+	
 }

@@ -1,27 +1,4 @@
-﻿Napisz program do obsługi systemu bankowego. Program przeznaczony jest dla pracowników banku. 
-
-Praca z programem odbywa się w trybie tekstowym (nie jest wymagane wykonanie GUI). 
-Program ma umożliwiać:
-
-    Założenie konta użytkownika ok
-    
-(system przechowuje następujące dane: numer klienta w systemie, imię, nazwisko, pesel, adres, 
-zgromadzone środki) ok
-    Usunięcie konta użytkownika
-    Dokonanie wpłaty na konto
-    
-Dokonanie wypłaty z konta
-    Transfer pieniędzy pomiędzy kontami
-    
-Wyświetlenie informacji o wszystkich kontach
-    Wyświetlenie informacji o wybranych kontach 
-spełniających podane przez użytkownika kryterium. 
-    
-Użytkownik najpierw podaje rodzaj kryterium (numer klienta, imię, nazwisko, pesel lub adres), 
-    
-następnie wprowadza poszukiwaną wartość.
-
-Przemyśl i sam zaproponuj w jaki sposób przechowywać informacje
+﻿Przemyśl i sam zaproponuj w jaki sposób przechowywać informacje
 o użytkownikach na dysku. 
 Nie korzystaj z gotowych, relacyjnych baz danych.
 
