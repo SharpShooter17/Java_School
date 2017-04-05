@@ -31,6 +31,19 @@ public class Address{
 	System.out.println( city + ", " + postalCode + ", " + street + " " + houseNumber );
   }
   
+  public boolean compareNotEvryFields(Address address) {
+	if ( !((address.street.equals("0") || address.street.equals(this.street))) ){
+	  return false;
+	} else if ( !((address.city.equals("0") || address.city.equals(this.city)))){
+	  return false;
+	} else if ( !((address.postalCode == 0 || address.postalCode == this.postalCode))){
+	  return false;
+	} else if ( !((address.houseNumber == 0 || address.houseNumber == this.houseNumber))){
+	  return false;
+	}	
+	return true;	
+  }
+  
   public boolean equals(Object obj){
 	  if (this == obj){
 		  return true;

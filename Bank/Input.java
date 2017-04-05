@@ -87,4 +87,9 @@ public class Input {
 		return result;	
 	}
 	
+	public void Stop(String information){
+		System.out.println(information);
+		sc.nextLine();
+	}
+	
 }

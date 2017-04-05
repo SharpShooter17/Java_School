@@ -8,11 +8,13 @@ public class SystemBankowy{
 	
 	SystemBankowy(){
 		klienci = new ArrayList<Klient>();
+		klienci.add(new Klient("Bartosz", "Ujazdowski", 1234567890, new Address("Lipowa", "Lodz", 99550, 25), 0, 1000000 ));
 	}
 	
 	boolean loop(){
 		menu();
 		int opcja = Input.instance().Int("Wybierz opcje: ");
+		wyczyscEkran();
 		switch (opcja){
 		case 0:
 			return false;
@@ -41,6 +43,8 @@ public class SystemBankowy{
 		default:
 			System.out.println("Nie ma takiej opcji.");				
 		}
+		
+		//Input.instance().Stop("Wcisnij enter aby kontynuowac.");
 		
 		return true;
 	}
@@ -81,22 +85,25 @@ public class SystemBankowy{
 	}
 	
 	private int opcjaWyszukaj(){
+		wyczyscEkran();
 		System.out.println("Wybierz kryterum wyszukiwania: ");
 		System.out.println("[1] Imie");
 		System.out.println("[2] Nazwisko");
 		System.out.println("[3] Adres");
 		System.out.println("[4] Numer klienta");
 		System.out.println("[5] PESEL");
+		System.out.println("[6] Anuluj operacje");
 		
 		int opcja = 0;
 		Input in = Input.instance();
 		do{
 			opcja = in.Int("Podaj poprawne kryterium: ");
-		} while ( opcja > 5 && opcja < 1 );
+		} while ( opcja > 6 && opcja < 1 );
 		return opcja;
 	}
 	
 	private void wyszukaj(){
+		wyczyscEkran();
 		Input in = Input.instance();
 		ArrayList<Klient> result = new ArrayList<Klient>();
 		
@@ -108,10 +115,18 @@ public class SystemBankowy{
 			result = wyszukajKlientowNazwisko( in.Str("Wpisz nazwisko szukanego klienta: ") );
 			break;
 		case 3:
+			String street, city;
+			int postalCode, houseNumber;
+			System.out.println("Aby ominac pole wpisz '0'");
+			city = in.Str("Podaj miasto: ");
+			street = in.Str("Podaj ulice: ");
+			postalCode = in.Int("Podaj kod pocztowy: ");
+			houseNumber = in.Int("Podaj numer domu: ");
+			result = wyszukajKlientowAdres( new Address(street, city, postalCode, houseNumber) );
 			break;
 		case 4:
 			try{
-			result.add( wyszukajKlientaNumerKonta( in.Long("Wpisz numer konta szukanego klienta: ") ) );
+			  result.add( wyszukajKlientaNumerKonta( in.Long("Wpisz numer konta szukanego klienta: ") ) );
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				return;
@@ -125,6 +140,8 @@ public class SystemBankowy{
 					return;
 				}
 			break;
+		case 6:
+			return;
 		}
 		
 		wyswietlKlientow(result);		
@@ -138,6 +155,7 @@ public class SystemBankowy{
 	}
 	
 	private void usunKlienta(){
+		wyczyscEkran();
 		Klient klient = null;
 		try {
 			klient = wyszukajKlientaPESEL(Input.instance().Long("Podaj numer PESEL klienta: "));
@@ -150,6 +168,7 @@ public class SystemBankowy{
 	}	
 	
 	private void dodajWplate(){
+		wyczyscEkran();
 		Klient klient = null;
 		try {
 			klient = wyszukajKlientaPESEL(Input.instance().Long("Podaj numer PESEL klienta: "));
@@ -224,6 +243,7 @@ public class SystemBankowy{
 	
 	
 	private void nowyKlient(){
+		wyczyscEkran();
 		System.out.println("Dodaj nowego klientas" );
 		
 		String [] dataName = {"Imie", "Nazwisko", "Miejscowosc", "Ulica"};
@@ -235,7 +255,7 @@ public class SystemBankowy{
 		Input in = Input.instance();
 		
 		for (int i = 0; i < data.length; i++){
-			data[i] = in.Str("Proszê podaæ " + dataName[i] + " klienta: ");
+			data[i] = in.Str("Prosze podac+ " + dataName[i] + " klienta: ");
 		}
 		
 		numerDomu = in.Int("Prosze podac numer domu klienta: ");
@@ -249,7 +269,7 @@ public class SystemBankowy{
 									stanKonta, generujNumerKonta(pesel, data[0], data[1])));
 	}
 	
-	Long generujNumerKonta(long pesel, String Imie, String Nazwisko){
+	private Long generujNumerKonta(long pesel, String Imie, String Nazwisko){
 		Long numerKonta = new Long(0);
 		
 		for (int i = 0; i < Imie.length(); i++){
@@ -263,4 +283,8 @@ public class SystemBankowy{
 		return Long.parseUnsignedLong(numerKonta.toString() + pesel);
 	}
 	
+	private void wyczyscEkran(){
+	  System.out.print("\033[H\033[2J");
+	  System.out.flush();
+	}
 }

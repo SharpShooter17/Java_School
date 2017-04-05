@@ -59,7 +59,7 @@ public class Klient{
 	public void wyswietlDane(){
 		System.out.print( "Imie: " + imie + 
 							"\nNazwisko: " + nazwisko + 
-							"\nPESEL" + pesel +
+							"\nPESEL: " + pesel +
 							"\nStan konta: " + stanKonta + 
 							"\nAdres: ");
 		adres.showAddress();
